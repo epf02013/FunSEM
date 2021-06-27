@@ -9,5 +9,5 @@ test_that("define_means",{
 
 test_that("define_means - with include_slopes true",{
   result <- define_means("variable_of_interest_name", TRUE)
-  expect_equal(result, 'variable_of_interest_name_level ~ 0*1\nvariable_of_interest_name_slope ~ 0*1')
+  expect_equal(result, 'variable_of_interest_name_level ~ 0*1\nvariable_of_interest_name_slope ~ 1')
 })
