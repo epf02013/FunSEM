@@ -12,7 +12,7 @@ This code depends on the tidyverse library for the `str_glue` function
 library(here)
 
 # import the file so we can use define_longitudinal_measurement_invariance_model
-source(here("longitudinal_invariance_model_helper.r"))
+source(here("longitudinal_measurement_invariance_model.r"))
 df = data.frame(
   cm01ec_lat= c("ec01_cmpar1", "ec01_cmpar2", "ec01_cmpar3", "ec01_cmpar4"),
   cm03ec_lat= c("ec03_cmpar1", "ec03_cmpar2", "ec03_cmpar3", "ec03_cmpar4"),
