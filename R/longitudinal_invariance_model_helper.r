@@ -128,20 +128,23 @@ define_latent_variable_variances <- function (factor_sets) {
 
 
 
-define_latent_variable_covariance_line <- function (column_pairs){
+define_latent_variable_covariance_line <- function (column_pairs, constrain_to_zero){
   function (column_index) {
     col_names <- column_pairs[,column_index]
+    if(constrain_to_zero) {
+      return(paste0(col_names[1], " ~~ 0*", col_names[2]))
+    }
     paste0(col_names[1], " ~~ ", col_names[2])
   }
 }
 
 
-define_latent_variable_covariances <- function (factor_sets) {
+define_latent_variable_covariances <- function (factor_sets, constrain_to_zero = FALSE) {
   factor_names = colnames(factor_sets)
   column_pairs = combn(factor_names,2)
   indexes = 1:length(column_pairs[1,])
-  define_factor_lineResult <- define_latent_variable_covariance_line(column_pairs)
-  factor_lines = sapply(indexes, define_factor_lineResult)
+  define_covariance_for_factor_pair <- define_latent_variable_covariance_line(column_pairs, constrain_to_zero)
+  factor_lines = sapply(indexes, define_covariance_for_factor_pair)
   paste(factor_lines, collapse = "\n")
 }
 

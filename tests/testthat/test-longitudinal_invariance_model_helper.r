@@ -121,3 +121,15 @@ test_that("latent variable covariances",{
   result <- define_latent_variable_covariances(dat_new)
   expect_equal(result, 'factor1 ~~ factor3\nfactor1 ~~ factor5\nfactor3 ~~ factor5')
 })
+
+
+test_that("latent variable covariances - when constraining to zero",{
+  dat_new <- data.frame(
+    factor1=c("1var1","1var2"),
+    factor3=c("3var1","3var2"),
+    factor5=c("5var1","5var2")
+  )
+  constrain_to_zero = TRUE
+  result <- define_latent_variable_covariances(dat_new, constrain_to_zero)
+  expect_equal(result, 'factor1 ~~ 0*factor3\nfactor1 ~~ 0*factor5\nfactor3 ~~ 0*factor5')
+})
