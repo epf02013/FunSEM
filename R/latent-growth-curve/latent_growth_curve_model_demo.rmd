@@ -12,7 +12,7 @@ This code depends on the tidyverse library for the `str_glue` function
 library(here)
 
 # import the file so we can use define_longitudinal_measurement_invariance_model
-source(here("latent_growth_curve_model.r"))
+source(here("R/latent-growth-curve/latent_growth_curve_model.r"))
 df = data.frame(
   cm01ec_lat= c("ec01_cmpar1", "ec01_cmpar2", "ec01_cmpar3", "ec01_cmpar4"),
   cm03ec_lat= c("ec03_cmpar1", "ec03_cmpar2", "ec03_cmpar3", "ec03_cmpar4"),
@@ -21,31 +21,47 @@ df = data.frame(
 )
 
 # You can generate CONFIGURAL, WEAK, STRONG, PARTIAL_STRONG, OR STRICT models
+variable_of_interest_name = "ec"
 
-ec_cm_configural <- define_latent_growth_curve_model(df, "CONFIGURAL")
 
-ec_cm_weak <- define_latent_growth_curve_model(df,"WEAK")
-
-ec_cm_partial_strong <- define_latent_growth_curve_model(
- df,
- "PARTIAL_STRONG",
- c(2,3)
+ec_cm_no_growth <- define_latent_growth_curve_model(
+  df,
+  variable_of_interest_name,
+  "NO_GROWTH",
+  "PARTIAL_STRONG",
+  c(2,3)
 )
 
-ec_cm_strong <- define_latent_growth_curve_model(df,"STRONG")
+ec_cm_linear <- define_latent_growth_curve_model(
+    df,
+    variable_of_interest_name,
+    "LINEAR",
+    "PARTIAL_STRONG",
+    c(2,3),
+    c(0, 2, 4, 6)
+)
 
-ec_cm_strict <- define_latent_growth_curve_model(df, "STRICT")
+ec_cm_latent_basis <- define_latent_growth_curve_model(
+  df,
+  variable_of_interest_name,
+  "LATENT_BASIS",
+  "STRONG",
+  slope_weights = c(0, NA, NA, 6)
+)
 
 # You could then plug it into your cool cfa function
-#fit_ec_cm_strong <- cfa(ec_cm_strict, data=dat, mimic = "mplus")
-#summary(fit_ec_cm_strong, fit.measures=TRUE)
+#ec_cm_latent_basis <- sem(ec_cm_latent_basis, data=dat, mimic = "mplus")
+#summary(ec_cm_latent_basis, fit.measures=TRUE)
 ```
 
 ### This is what the output of the model looks like configural
 ```{r}
-writeLines(ec_cm_configural)
+writeLines(ec_cm_latent_basis)
 ```
 ### Partial Strong
 ```{r}
-writeLines(ec_cm_partial_strong)
+writeLines(ec_cm_no_growth)
+```
+```{r}
+writeLines(ec_cm_linear)
 ```
