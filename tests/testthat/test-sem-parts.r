@@ -1,5 +1,5 @@
 library(here)
-source(here("R/longitudinal_measurement_invariance_model.r"))
+source(here("R/sem-parts.r"))
 
 test_that("define_factor_line",{
   df = data.frame(factor1=c("var1", "var2", "var3"))
