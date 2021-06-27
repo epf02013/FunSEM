@@ -1,5 +1,5 @@
 library(here)
-source(here("R/sem-parts.r"))
+source(here("../sem-parts.r"))
 
 define_latent_growth_curve_model = function(df, model_strength = "CONFIGURAL", unconstrained_parcel_indices = c()){
   is_weak <- model_strength == "WEAK"
