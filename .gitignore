@@ -1,1 +1,8 @@
+# editor files
+.idea
+
+# scratch files
+todo.md
+
+# packrat
 packrat/lib*/
