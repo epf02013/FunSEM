@@ -1,6 +1,3 @@
-library(here)
-source(here("R/sem-parts.r"))
-
 test_that("define_factor_line",{
   df = data.frame(factor1=c("var1", "var2", "var3"))
   result = define_factor_line(df)("factor1")

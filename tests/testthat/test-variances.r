@@ -1,6 +1,3 @@
-library(here)
-source(here("R/variances.r"))
-
 test_that("define_level_slope_variances",{
   result <- define_level_slope_variances("variable_of_interest_name")
   expect_equal(result, 'variable_of_interest_name_level ~~ variable_of_interest_name_level')

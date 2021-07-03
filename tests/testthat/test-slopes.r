@@ -1,6 +1,3 @@
-library(here)
-source(here("R/slopes.r"))
-
 test_that("define_slope_factor",{
   dat_new <- data.frame(
     factor1=c("var1","var2"),

@@ -1,6 +1,3 @@
-library(here)
-source(here("R/level-factor.r"))
-
 test_that("define_level_factor",{
     dat_new <- data.frame(
       factor1=c("var1","var2"),
