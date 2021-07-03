@@ -1,10 +1,4 @@
-library(here)
-source(here("R/sem-parts.r"))
-source(here("R/latent-growth-curve/level-factor.r"))
-source(here("R/latent-growth-curve/slopes.r"))
-source(here("R/latent-growth-curve/means.r"))
-source(here("R/latent-growth-curve/variances.r"))
-
+#' @export
 define_latent_growth_curve_model = function(df, variable_of_interest_name, model_type, model_strength = "CONFIGURAL", unconstrained_parcel_indices = c(), slope_weights=c()){
   slope_weights_provided = length(slope_weights) > 0
   slope_weights_to_pass = if(slope_weights_provided) {

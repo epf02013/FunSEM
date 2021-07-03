@@ -1,6 +1,4 @@
-library(here)
-source(here("R/sem-parts.r"))
-
+#' @export
 define_longitudinal_measurement_invariance_model = function(df, model_strength = "CONFIGURAL", unconstrained_parcel_indices = c()){
   is_weak <- model_strength == "WEAK"
   is_strong <- model_strength == "STRONG" || model_strength == "PARTIAL_STRONG"

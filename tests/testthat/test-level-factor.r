@@ -1,5 +1,5 @@
 library(here)
-source(here("R/latent-growth-curve/level-factor.r"))
+source(here("R/level-factor.r"))
 
 test_that("define_level_factor",{
     dat_new <- data.frame(

@@ -1,4 +1,3 @@
-
 define_level_slope_variances <- function (variable_of_interest_name, include_slope = FALSE) {
   level_name = paste0(variable_of_interest_name,"_level")
   level_to_level = paste0(level_name, " ~~ ", level_name)

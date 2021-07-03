@@ -1,5 +1,5 @@
 library(here)
-source(here("R/latent-growth-curve/means.r"))
+source(here("R/means.r"))
 
 test_that("define_means",{
   result <- define_means("variable_of_interest_name")

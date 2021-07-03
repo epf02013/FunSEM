@@ -1,5 +1,5 @@
 library(here)
-source(here("R/latent-growth-curve/slopes.r"))
+source(here("R/slopes.r"))
 
 test_that("define_slope_factor",{
   dat_new <- data.frame(
