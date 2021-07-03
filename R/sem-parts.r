@@ -109,8 +109,8 @@ define_latent_variable_means <- function (factor_sets) {
   factor_names = colnames(factor_sets)
   paste0(
     factor_names[1], " ~ 0*1\n",
-    paste(tail(factor_names, -1), collapse = " ~ 1\n"),
-    " ~ 1"
+    paste(tail(factor_names, -1), collapse = " ~ 0*1\n"),
+    " ~ 0*1"
   )
 }
 

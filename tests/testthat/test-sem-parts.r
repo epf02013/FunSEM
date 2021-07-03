@@ -98,7 +98,7 @@ test_that("latent variable means",{
     factor5=c("5var1","5var2")
   )
   result <- define_latent_variable_means(dat_new)
-  expect_equal(result, 'factor1 ~ 0*1\nfactor3 ~ 1\nfactor5 ~ 1')
+  expect_equal(result, 'factor1 ~ 0*1\nfactor3 ~ 0*1\nfactor5 ~ 0*1')
 })
 
 
