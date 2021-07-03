@@ -34,8 +34,6 @@ define_latent_growth_curve_model = function(df, variable_of_interest_name, model
     define_latent_variable_means(df),
     "\n\n# Latent variable variances and covariances\n",
     define_latent_variable_variances(df),
-    "\n\n",
-    define_latent_variable_covariances(df, TRUE),
     "\n\n# Level factor loadings\n",
     define_level_factor(df, variable_of_interest_name),
     if(include_slope) "\n\n# Slope factor loadings\n" else "",
