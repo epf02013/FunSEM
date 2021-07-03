@@ -109,7 +109,7 @@ test_that("latent variable variances",{
     factor5=c("5var1","5var2")
   )
   result <- define_latent_variable_variances(dat_new)
-  expect_equal(result, 'factor1 ~~ 1*factor1\nfactor3 ~~ factor3\nfactor5 ~~ factor5')
+  expect_equal(result, 'factor1 ~~ factor1\nfactor3 ~~ factor3\nfactor5 ~~ factor5')
 })
 
 test_that("latent variable covariances",{

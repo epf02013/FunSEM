@@ -119,7 +119,7 @@ define_latent_variable_variances <- function (factor_sets) {
   tailResult <- sapply(tail(factor_names, -1), function(p) { paste(p," ~~ ",p, sep = "")})
   paste0(
     factor_names[1],
-    " ~~ 1*", factor_names[1],
+    " ~~ ", factor_names[1],
     "\n",
     paste(tailResult, collapse = "\n")
   )
