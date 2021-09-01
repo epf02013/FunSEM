@@ -1,16 +1,16 @@
 define_factor_line <- function (df, is_weak = FALSE){
   function (factor_name) {
     variables <- df[[factor_name]]
-
+    
     if (is_weak) {
       var_res = mapply(function (var_name, index){
         paste0("lambda", index, "*", var_name)
-      }, variables, 1:length(variables))
+      }, tail(variables, -1), 2:length(variables))
       return(
-        paste0(factor_name, " =~ NA*", variables[1], " + ", paste(var_res, collapse = " + "))
+        paste0(factor_name, " =~ 1*", variables[1], " + ", paste(var_res, collapse = " + "))
       )
     }
-    paste0(factor_name, " =~ NA*", variables[1], " + lambda1*", variables[1], " + ", paste(tail(variables, -1), collapse = " + "))
+    paste0(factor_name, " =~ 1*", variables[1], " + ", paste(tail(variables, -1), collapse = " + "))
   }
 }
 
@@ -31,7 +31,7 @@ define_intercept_line <- function (df,strong, unconstrained_parcel_indices = c()
         paste0(varr, " ~ 1")
       })
       return(
-        paste0(variables[1], " ~ i1*1\n", paste(tailResult, collapse = "\n"))
+        paste0(variables[1], " ~ 1\n", paste(tailResult, collapse = "\n"))
       )
     }
     variables <- df[[factor_name]]

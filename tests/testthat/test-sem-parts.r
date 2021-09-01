@@ -1,13 +1,13 @@
 test_that("define_factor_line",{
   df = data.frame(factor1=c("var1", "var2", "var3"))
   result = define_factor_line(df)("factor1")
-  expect_equal(result, "factor1 =~ NA*var1 + lambda1*var1 + var2 + var3")
+  expect_equal(result, "factor1 =~ 1*var1 + var2 + var3")
 })
 
 test_that("define_factor_line weak",{
   df = data.frame(factor1=c("var1", "var2", "var3"))
   result = define_factor_line(df, TRUE)("factor1")
-  expect_equal(result, "factor1 =~ NA*var1 + lambda1*var1 + lambda2*var2 + lambda3*var3")
+  expect_equal(result, "factor1 =~ 1*var1 + lambda2*var2 + lambda3*var3")
 })
 
 test_that("define_factors", {
@@ -16,7 +16,7 @@ test_that("define_factors", {
     factor2=c("2var1","2var2")
   )
   result <- define_factors(dat_new)
-  expect_equal(result, 'factor1 =~ NA*var1 + lambda1*var1 + var2\nfactor2 =~ NA*2var1 + lambda1*2var1 + 2var2')
+  expect_equal(result, 'factor1 =~ 1*var1 + var2\nfactor2 =~ 1*2var1 + 2var2')
 })
 
 
@@ -26,7 +26,7 @@ test_that("define_intercepts",{
     factor2=c("2var1","2var2")
   )
   result <- define_intercepts(dat_new)
-  expect_equal(result, 'var1 ~ i1*1\nvar2 ~ 1\n\n2var1 ~ i1*1\n2var2 ~ 1')
+  expect_equal(result, 'var1 ~ 1\nvar2 ~ 1\n\n2var1 ~ 1\n2var2 ~ 1')
 })
 
 
