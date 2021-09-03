@@ -88,14 +88,24 @@ test_that("define_covariances",{
 })
 
 
-test_that("latent variable means",{
+test_that("latent variable means when constrain_all_means_to_zero is true",{
   dat_new <- data.frame(
     factor1=c("1var1","1var2"),
     factor3=c("3var1","3var2"),
     factor5=c("5var1","5var2")
   )
-  result <- define_latent_variable_means(dat_new)
+  result <- define_latent_variable_means(dat_new, TRUE)
   expect_equal(result, 'factor1 ~ 0*1\nfactor3 ~ 0*1\nfactor5 ~ 0*1')
+})
+
+test_that("latent variable means when constrain_all_means_to_zero is false",{
+  dat_new <- data.frame(
+    factor1=c("1var1","1var2"),
+    factor3=c("3var1","3var2"),
+    factor5=c("5var1","5var2")
+  )
+  result <- define_latent_variable_means(dat_new, FALSE)
+  expect_equal(result, 'factor1 ~ 0*1\nfactor3 ~ 1\nfactor5 ~ 1')
 })
 
 

@@ -1,7 +1,7 @@
 define_factor_line <- function (df, is_weak = FALSE){
   function (factor_name) {
     variables <- df[[factor_name]]
-    
+
     if (is_weak) {
       var_res = mapply(function (var_name, index){
         paste0("lambda", index, "*", var_name)
@@ -105,12 +105,23 @@ define_covariances <- function (factor_sets) {
 
 
 
-define_latent_variable_means <- function (factor_sets) {
+define_latent_variable_means <- function (factor_sets, constrain_all_means_to_zero) {
   factor_names = colnames(factor_sets)
-  paste0(
-    factor_names[1], " ~ 0*1\n",
-    paste(tail(factor_names, -1), collapse = " ~ 0*1\n"),
-    " ~ 0*1"
+  if(constrain_all_means_to_zero) {
+    return(
+      paste0(
+        factor_names[1], " ~ 0*1\n",
+        paste(tail(factor_names, -1), collapse = " ~ 0*1\n"),
+        " ~ 0*1"
+      )
+    )
+  }
+  return (
+    paste0(
+      factor_names[1], " ~ 0*1\n",
+      paste(tail(factor_names, -1), collapse = " ~ 1\n"),
+      " ~ 1"
+    )
   )
 }
 
