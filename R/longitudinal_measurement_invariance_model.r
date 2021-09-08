@@ -13,7 +13,7 @@ define_longitudinal_measurement_invariance_model = function(df, model_strength =
     "\n\n",
     define_covariances(df),
     "\n\n# Latent variable means\n",
-    define_latent_variable_means(df),
+    define_latent_variable_means(df, FALSE),
     "\n\n# Latent variable variances and covariances\n",
     define_latent_variable_variances(df),
     "\n\n",
