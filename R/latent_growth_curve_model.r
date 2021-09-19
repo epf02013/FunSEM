@@ -1,7 +1,7 @@
 
 
 #' @export
-define_latent_growth_curve_model = function(df, variable_of_interest_name, model_type, model_strength = "CONFIGURAL", unconstrained_parcel_indices = c(), slope_weights=c(), time_invariant_covariate_name = ""){
+define_latent_growth_curve_model = function(df, variable_of_interest_name, model_type, model_strength = "CONFIGURAL", unconstrained_parcel_indices = c(), slope_weights=c(), time_invariant_covariate_name = "", is_multiple_group_model = FALSE){
   slope_weights_provided = length(slope_weights) > 0
   slope_weights_to_pass = if(slope_weights_provided) {
     slope_weights
@@ -36,7 +36,7 @@ define_latent_growth_curve_model = function(df, variable_of_interest_name, model
     if(include_slope) "\n\n# Slope factor loadings\n" else "",
     if(include_slope) define_slope_factor(df, variable_of_interest_name, slope_weights_to_pass) else "",
     "\n\n# Means\n",
-    define_means(variable_of_interest_name, include_slope),
+    define_means(variable_of_interest_name, include_slope, is_multiple_group_model),
     "\n\n# Variances\n",
     define_level_slope_variances(variable_of_interest_name, include_slope),
     if(should_set_time_invariant_covariate) "\n\n# Time invariant covariate\n" else "",
