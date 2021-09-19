@@ -1,5 +1,7 @@
+
+
 #' @export
-define_latent_growth_curve_model = function(df, variable_of_interest_name, model_type, model_strength = "CONFIGURAL", unconstrained_parcel_indices = c(), slope_weights=c()){
+define_latent_growth_curve_model = function(df, variable_of_interest_name, model_type, model_strength = "CONFIGURAL", unconstrained_parcel_indices = c(), slope_weights=c(), time_invariant_covariate_name = ""){
   slope_weights_provided = length(slope_weights) > 0
   slope_weights_to_pass = if(slope_weights_provided) {
     slope_weights
@@ -15,6 +17,7 @@ define_latent_growth_curve_model = function(df, variable_of_interest_name, model
   is_strict <- model_strength == "STRICT"
 
   include_slope = model_type == "LINEAR" || model_type == "LATENT_BASIS"
+  should_set_time_invariant_covariate <- time_invariant_covariate_name != ""
   paste0(
     "# Define factors\n\n",
     define_factors(df, is_weak || is_strong || is_strict),
@@ -35,6 +38,8 @@ define_latent_growth_curve_model = function(df, variable_of_interest_name, model
     "\n\n# Means\n",
     define_means(variable_of_interest_name, include_slope),
     "\n\n# Variances\n",
-    define_level_slope_variances(variable_of_interest_name, include_slope)
+    define_level_slope_variances(variable_of_interest_name, include_slope),
+    if(should_set_time_invariant_covariate) "\n\n# Time invariant covariate" else "",
+    if(should_set_time_invariant_covariate) set_time_invariant_covariate(variable_of_interest_name, time_invariant_covariate_name, include_slope) else "",
   )
 }
