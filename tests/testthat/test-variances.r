@@ -14,3 +14,15 @@ test_that("define_level_slope_variances - with include_slopes true",{
   )
   expect_equal(result, pasteResult)
 })
+
+
+test_that("define_level_slope_variances - with include_slopes true and constrain_group_variances_to_be_equal is TRUE",{
+  result <- define_level_slope_variances("pop", TRUE, TRUE)
+  pasteResult <- paste(
+    'pop_level ~~ c(LV,LV)*pop_level',
+    'pop_level ~~ c(LSV,LSV)*pop_slope',
+    'pop_slope ~~ c(SV,SV)*pop_slope',
+    sep = "\n"
+  )
+  expect_equal(result, pasteResult)
+})

@@ -38,7 +38,7 @@ define_latent_growth_curve_model = function(df, variable_of_interest_name, model
     "\n\n# Means\n",
     define_means(variable_of_interest_name, include_slope, is_multiple_group_model),
     "\n\n# Variances\n",
-    define_level_slope_variances(variable_of_interest_name, include_slope),
+    define_level_slope_variances(variable_of_interest_name, include_slope, is_multiple_group_model),
     if(should_set_time_invariant_covariate) "\n\n# Time invariant covariate\n" else "",
     if(should_set_time_invariant_covariate) set_time_invariant_covariate(variable_of_interest_name, time_invariant_covariate_name, include_slope) else ""
   )
